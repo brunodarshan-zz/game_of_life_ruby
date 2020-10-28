@@ -40,8 +40,8 @@ class GameOfLife
 
     def compute_next_generation
         computed_generation = Array.new(@cells.size, Array.new(@cells.size))
-        @cells.size do |line|
-            (0..@cells.size).to_a do |col|
+        @cells.each_with_index.map do |line_value, line|
+            line_value.each_with_index do |col|
                 neighbors = count_neighbors_alive(line, col)
                 computed_generation[line, col] = (neighbors < 2 || neighbors > 3) ? 0 : 1
             end
